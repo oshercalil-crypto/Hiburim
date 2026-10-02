@@ -169,10 +169,17 @@
 
 /* supersedes the old fixed contact styling */
 .top-whatsapp-contact{display:none!important}
+
+.legal-page{max-width:760px;margin:20px auto;text-align:right;line-height:1.75}
+.legal-page h2{margin-top:0}
+.legal-page h3{margin-top:22px;margin-bottom:5px}
+.legal-page p{margin-top:4px}
 </style></head><body><div class="site-menu">
 <button class="menu-toggle" type="button" aria-label="פתיחת תפריט" aria-expanded="false" onclick="toggleSiteMenu(this)">☰</button>
 <div class="menu-dropdown">
 <a href="https://wa.me/972537447226" target="_blank" rel="noopener">💬 צור קשר ב-WhatsApp</a>
+<a href="#" onclick="event.preventDefault();go('privacy')">🔒 מדיניות פרטיות</a>
+<a href="#" onclick="event.preventDefault();go('terms')">📄 תנאי שימוש</a>
 </div>
 </div><div class="wrap">
 <section id="home" class="screen active"><div class="hero"><div class="brand">חיבורים</div><h1>מוצאים שותפים לדירה ולטיול.</h1><p>מקום פשוט ונעים להכיר אנשים שמחפשים שותפים לדירה או לטיול.</p></div><div class="choices"><div class="choice primaryChoice" onclick="openPartners()"><h2>🏠 חפש שותפים לדירה</h2><p>חיפוש שותפים לדירה.</p></div><div class="choice" onclick="openTravelPartners()"><h2>✈️ חפש שותפים לטיול</h2><p>מצא אנשים שמחפשים שותף לטיול.</p></div><div class="choice" onclick="openPersonal()"><h2>👤 אזור אישי</h2><p id="personalHint">כניסה, הרשמה וניהול המודעות.</p></div></div></section>
@@ -195,7 +202,47 @@
 <label>קצת עליי ומה אני מחפש</label><textarea name="description" required maxlength="1000"></textarea><button class="primary">פרסם מודעה</button><div id="publishStatus" class="status"></div></form></section>
 <section id="partners" class="screen"><button class="back" onclick="go('home')">← חזרה</button><div class="card"><h2>אנשים שמחפשים שותף</h2><label>עיר / אזור</label><input id="partnerCitySearch" placeholder="חפש לפי עיר"><label>גיל</label><div class="filters"><input id="partnerAgeFrom" type="number" min="18" max="100" placeholder="מגיל"><input id="partnerAgeTo" type="number" min="18" max="100" placeholder="עד גיל"></div><label>תקציב</label><div class="filters"><input id="partnerBudgetFrom" type="number" min="0" placeholder="תקציב מ־"><input id="partnerBudgetTo" type="number" min="0" placeholder="תקציב עד"></div><label>שותף רצוי</label><select id="partnerGenereWanted"><option value="">הכל</option><option value="שותף">שותף</option><option value="שותפה">שותפה</option><option value="לא משנה">לא משנה</option></select><button class="primary" onclick="loadPartners()">חפש</button><div id="partnerResultsCount" class="results-count"></div><div id="partnerResults" class="results"></div></div></section><section id="travelPartners" class="screen"><button class="back" onclick="go('home')">← חזרה</button><div class="card"><h2>אנשים שמחפשים שותף לטיול</h2><label>יעד הטיול</label><input id="travelCitySearch" placeholder="יעד הטיול"><label>גיל</label><div class="filters"><input id="travelAgeFrom" type="number" min="18" max="100" placeholder="מגיל"><input id="travelAgeTo" type="number" min="18" max="100" placeholder="עד גיל"></div><button class="primary" onclick="loadTravelPartners()">חפש</button><div id="travelResultsCount" class="results-count"></div><div id="travelResults" class="results"></div></div></section>
 <section id="myAds" class="screen"><button class="back" onclick="go('personal')">← חזרה</button><div class="card"><h2>המודעות שלי</h2><div id="myAdsResults" class="results"></div></div></section>
-</div><script>
+</div>
+<section id="privacy" class="screen">
+  <div class="card legal-page">
+    <h2>מדיניות פרטיות</h2>
+    <p>הפרטיות שלכם חשובה לנו. מדיניות זו מסבירה בקצרה איזה מידע עשוי להיאסף באתר וכיצד הוא משמש.</p>
+    <h3>איזה מידע נאסף?</h3>
+    <p>בעת הרשמה ושימוש באתר עשויים להישמר פרטים שמסרתם, כגון פרטי חשבון, שם, גיל, עיר, מספר טלפון ותוכן המודעות שאתם מפרסמים.</p>
+    <h3>למה המידע משמש?</h3>
+    <p>המידע משמש להפעלת האתר, ניהול החשבון, פרסום המודעות, חיפוש והתאמה בין משתמשים ויצירת קשר בין אנשים המעוניינים בשותפות לדירה או לטיול.</p>
+    <h3>מידע שמופיע במודעות</h3>
+    <p>פרטים שאתם בוחרים לפרסם במודעה עשויים להיות גלויים למשתמשים אחרים באתר. מספר הטלפון משמש לאפשר יצירת קשר באמצעות WhatsApp.</p>
+    <h3>שמירת מידע ואבטחה</h3>
+    <p>האתר משתמש בשירותי Supabase לצורך אחסון וניהול נתונים. אנו משתדלים לנקוט אמצעים סבירים להגנה על המידע, אך אין מערכת אינטרנטית המבטיחה אבטחה מוחלטת.</p>
+    <h3>מחיקה ועדכון</h3>
+    <p>משתמש יכול לערוך או למחוק את המודעות שלו באמצעות האפשרויות הקיימות באתר. לבקשות נוספות הנוגעות למידע ניתן ליצור קשר דרך WhatsApp בתפריט האתר.</p>
+    <h3>שינויים במדיניות</h3>
+    <p>ייתכן שמדיניות זו תתעדכן בעתיד בהתאם לשינויים באתר ובשירותים שהוא מציע.</p>
+    <button class="secondary" onclick="go('home')">חזרה למסך הראשי</button>
+  </div>
+</section>
+
+<section id="terms" class="screen">
+  <div class="card legal-page">
+    <h2>תנאי שימוש</h2>
+    <p>השימוש באתר מיועד לסייע לאנשים ליצור קשר לצורך מציאת שותפים לדירה או שותפים לטיול.</p>
+    <h3>אחריות המשתמש</h3>
+    <p>המשתמש אחראי לכך שהמידע שהוא מפרסם נכון, חוקי ואינו פוגע בזכויות של אחרים. אין לפרסם תוכן מטעה, מאיים, פוגעני או בלתי חוקי.</p>
+    <h3>יצירת קשר בין משתמשים</h3>
+    <p>האתר מספק פלטפורמה ליצירת קשר בלבד. כל שיחה, פגישה, הסכמה, תשלום, שכירות או התקשרות אחרת נעשים ישירות בין המשתמשים ועל אחריותם.</p>
+    <h3>זהירות ובטיחות</h3>
+    <p>מומלץ להפעיל שיקול דעת לפני מסירת מידע נוסף, העברת כספים או פגישה עם אדם שהכרתם דרך האתר. מומלץ לקיים פגישה ראשונה במקום ציבורי ולוודא פרטים חשובים באופן עצמאי.</p>
+    <h3>מודעות ותוכן</h3>
+    <p>ניתן להסיר מודעות או תוכן במקרה של שימוש לרעה באתר, הפרת התנאים או חשש לפגיעה במשתמשים אחרים.</p>
+    <h3>זמינות האתר</h3>
+    <p>איננו מתחייבים שהאתר יהיה זמין בכל עת או נקי מתקלות. האתר והשירותים בו עשויים להשתנות ולהתעדכן מעת לעת.</p>
+    <h3>שינויים בתנאים</h3>
+    <p>ייתכן שתנאי השימוש יעודכנו בעתיד בהתאם להתפתחות האתר.</p>
+    <button class="secondary" onclick="go('home')">חזרה למסך הראשי</button>
+  </div>
+</section>
+<script>
 const SUPABASE_URL='https://npddfoxraovxulhoxikm.supabase.co';
 const SUPABASE_KEY='sb_publishable_pJct-0K0EtATw1UGSonLig_2VbGFrIS';
 const sb=supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
