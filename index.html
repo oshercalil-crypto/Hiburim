@@ -118,7 +118,62 @@
   box-shadow:0 2px 8px rgba(0,0,0,.12);
 }
 .top-whatsapp-contact:hover{transform:translateY(-1px)}
-</style></head><body><a class="top-whatsapp-contact" href="https://wa.me/972537447226" target="_blank" rel="noopener" aria-label="יצירת קשר ב-WhatsApp" title="יצירת קשר ב-WhatsApp">💬 צור קשר</a><div class="wrap">
+
+.site-menu{
+  position:absolute;
+  top:12px;
+  right:12px;
+  z-index:1000;
+}
+.menu-toggle{
+  width:42px;
+  height:42px;
+  min-width:42px;
+  padding:0;
+  border-radius:12px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:25px;
+  line-height:1;
+  cursor:pointer;
+  background:#fff;
+  color:#222;
+  border:1px solid rgba(0,0,0,.12);
+  box-shadow:0 2px 8px rgba(0,0,0,.10);
+}
+.menu-dropdown{
+  display:none;
+  position:absolute;
+  top:50px;
+  right:0;
+  min-width:210px;
+  background:#fff;
+  border:1px solid rgba(0,0,0,.10);
+  border-radius:12px;
+  box-shadow:0 8px 24px rgba(0,0,0,.16);
+  overflow:hidden;
+}
+.site-menu.open .menu-dropdown{display:block}
+.menu-dropdown a{
+  display:block;
+  padding:13px 15px;
+  text-decoration:none;
+  color:#222;
+  font-weight:700;
+  white-space:nowrap;
+  text-align:right;
+}
+.menu-dropdown a:hover{background:#f5f5f5}
+
+/* supersedes the old fixed contact styling */
+.top-whatsapp-contact{display:none!important}
+</style></head><body><div class="site-menu">
+<button class="menu-toggle" type="button" aria-label="פתיחת תפריט" aria-expanded="false" onclick="toggleSiteMenu(this)">☰</button>
+<div class="menu-dropdown">
+<a href="https://wa.me/972537447226" target="_blank" rel="noopener">💬 צור קשר ב-WhatsApp</a>
+</div>
+</div><div class="wrap">
 <section id="home" class="screen active"><div class="hero"><div class="brand">חיבורים</div><h1>מוצאים שותפים לדירה ולטיול.</h1><p>מקום פשוט ונעים להכיר אנשים שמחפשים שותפים לדירה או לטיול.</p></div><div class="choices"><div class="choice primaryChoice" onclick="openPartners()"><h2>🏠 חפש שותפים לדירה</h2><p>חיפוש שותפים לדירה.</p></div><div class="choice" onclick="openTravelPartners()"><h2>✈️ חפש שותפים לטיול</h2><p>מצא אנשים שמחפשים שותף לטיול.</p></div><div class="choice" onclick="openPersonal()"><h2>👤 אזור אישי</h2><p id="personalHint">כניסה, הרשמה וניהול המודעות.</p></div></div></section>
 <section id="auth" class="screen"><button class="back" onclick="go('home')">← חזרה</button><div class="card"><h2>כניסה לאזור האישי</h2><p class="muted">התחבר באמצעות אימייל וסיסמה.</p><form onsubmit="login(event)"><label>אימייל</label><input name="email" type="email" required autocomplete="email"><label>סיסמה</label><input name="password" type="password" required minlength="6" autocomplete="current-password"><button class="primary">כניסה</button></form><button class="secondary" onclick="go('signup')">אין לי חשבון — הרשמה</button><button class="linkbtn" onclick="go('forgot')">שכחתי סיסמה</button><div id="authStatus" class="status"></div></div></section>
 <section id="signup" class="screen"><button class="back" onclick="go('auth')">← חזרה</button><form class="card" onsubmit="signup(event)"><h2>יצירת חשבון</h2><label>שם לתצוגה</label><input name="displayName" required maxlength="80"><label>אימייל</label><input name="email" type="email" required autocomplete="email"><label>סיסמה</label><input name="password" type="password" required minlength="6" autocomplete="new-password"><button class="primary">יצירת חשבון</button><div id="signupStatus" class="status"></div></form></section>
@@ -157,5 +212,7 @@ async function loadTravelPartners(){const box=document.getElementById('travelRes
 async function loadMyAds(){if(!currentUser)return go('auth');go('myAds');const box=document.getElementById('myAdsResults');box.innerHTML='<div class="empty">טוען...</div>';const {data,error}=await sb.from('listings').select('id,name,age,city,phone,description,created_at,frombujet,tobujet,genere,generewanted,listing_type').eq('user_id',currentUser.id).order('created_at',{ascending:false});box.innerHTML='';if(error)return box.innerHTML='<div class="empty">לא הצלחנו לטעון את המודעות שלך.</div>';if(!data.length)return box.innerHTML='<div class="empty">אין לך כרגע מודעות.</div>';data.forEach(x=>box.appendChild(makeListing(x,true,x.listing_type==='travel_partner')))}
 function editAd(x){editingAdId=x.id;openPublish(x.listing_type||'looking_together',true);const form=document.querySelector('#publish form');form.elements.name.value=x.name||'';form.elements.age.value=x.age||'';form.elements.city.value=x.city||'';form.elements.phone.value=x.phone||'';form.elements.description.value=x.description||'';if((x.listing_type||'looking_together')==='looking_together'){form.elements.frombujet.value=x.frombujet??'';form.elements.tobujet.value=x.tobujet??'';form.elements.genere.value=x.genere||'';form.elements.generewanted.value=x.generewanted||'לא משנה'}}
 async function deleteAd(id,b){if(!confirm('למחוק את המודעה?'))return;b.disabled=true;const {error}=await sb.from('listings').delete().eq('id',id);if(error){alert('לא הצלחנו למחוק את המודעה.');b.disabled=false;return}b.closest('.listing').remove();if(!document.querySelector('#myAdsResults .listing'))document.getElementById('myAdsResults').innerHTML='<div class="empty">אין לך כרגע מודעות.</div>'}
+function toggleSiteMenu(btn){const menu=btn.closest('.site-menu');const open=menu.classList.toggle('open');btn.setAttribute('aria-expanded',open?'true':'false')}
+document.addEventListener('click',function(e){document.querySelectorAll('.site-menu.open').forEach(function(menu){if(!menu.contains(e.target)){menu.classList.remove('open');const b=menu.querySelector('.menu-toggle');if(b)b.setAttribute('aria-expanded','false')}})});
 init();
 </script></body></html>
