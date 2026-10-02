@@ -101,7 +101,24 @@
   z-index:2;
 }
 .whatsapp-listing:hover{transform:scale(1.05)}
-</style></head><body><div class="wrap">
+
+.top-whatsapp-contact{
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  padding:8px 12px;
+  border-radius:999px;
+  background:#25D366;
+  color:#fff;
+  text-decoration:none;
+  font-weight:700;
+  font-size:14px;
+  white-space:nowrap;
+  margin:8px 10px;
+  box-shadow:0 2px 8px rgba(0,0,0,.12);
+}
+.top-whatsapp-contact:hover{transform:translateY(-1px)}
+</style></head><body><a class="top-whatsapp-contact" href="https://wa.me/972537447226" target="_blank" rel="noopener" aria-label="יצירת קשר ב-WhatsApp" title="יצירת קשר ב-WhatsApp">💬 צור קשר</a><div class="wrap">
 <section id="home" class="screen active"><div class="hero"><div class="brand">חיבורים</div><h1>מוצאים שותפים לדירה ולטיול.</h1><p>מקום פשוט ונעים להכיר אנשים שמחפשים שותפים לדירה או לטיול.</p></div><div class="choices"><div class="choice primaryChoice" onclick="openPartners()"><h2>🏠 חפש שותפים לדירה</h2><p>חיפוש שותפים לדירה.</p></div><div class="choice" onclick="openTravelPartners()"><h2>✈️ חפש שותפים לטיול</h2><p>מצא אנשים שמחפשים שותף לטיול.</p></div><div class="choice" onclick="openPersonal()"><h2>👤 אזור אישי</h2><p id="personalHint">כניסה, הרשמה וניהול המודעות.</p></div></div></section>
 <section id="auth" class="screen"><button class="back" onclick="go('home')">← חזרה</button><div class="card"><h2>כניסה לאזור האישי</h2><p class="muted">התחבר באמצעות אימייל וסיסמה.</p><form onsubmit="login(event)"><label>אימייל</label><input name="email" type="email" required autocomplete="email"><label>סיסמה</label><input name="password" type="password" required minlength="6" autocomplete="current-password"><button class="primary">כניסה</button></form><button class="secondary" onclick="go('signup')">אין לי חשבון — הרשמה</button><button class="linkbtn" onclick="go('forgot')">שכחתי סיסמה</button><div id="authStatus" class="status"></div></div></section>
 <section id="signup" class="screen"><button class="back" onclick="go('auth')">← חזרה</button><form class="card" onsubmit="signup(event)"><h2>יצירת חשבון</h2><label>שם לתצוגה</label><input name="displayName" required maxlength="80"><label>אימייל</label><input name="email" type="email" required autocomplete="email"><label>סיסמה</label><input name="password" type="password" required minlength="6" autocomplete="new-password"><button class="primary">יצירת חשבון</button><div id="signupStatus" class="status"></div></form></section>
@@ -141,4 +158,4 @@ async function loadMyAds(){if(!currentUser)return go('auth');go('myAds');const b
 function editAd(x){editingAdId=x.id;openPublish(x.listing_type||'looking_together',true);const form=document.querySelector('#publish form');form.elements.name.value=x.name||'';form.elements.age.value=x.age||'';form.elements.city.value=x.city||'';form.elements.phone.value=x.phone||'';form.elements.description.value=x.description||'';if((x.listing_type||'looking_together')==='looking_together'){form.elements.frombujet.value=x.frombujet??'';form.elements.tobujet.value=x.tobujet??'';form.elements.genere.value=x.genere||'';form.elements.generewanted.value=x.generewanted||'לא משנה'}}
 async function deleteAd(id,b){if(!confirm('למחוק את המודעה?'))return;b.disabled=true;const {error}=await sb.from('listings').delete().eq('id',id);if(error){alert('לא הצלחנו למחוק את המודעה.');b.disabled=false;return}b.closest('.listing').remove();if(!document.querySelector('#myAdsResults .listing'))document.getElementById('myAdsResults').innerHTML='<div class="empty">אין לך כרגע מודעות.</div>'}
 init();
-</script><a class="whatsapp-float" href="https://wa.me/972537447226" target="_blank" rel="noopener" aria-label="יצירת קשר ב-WhatsApp" title="יצירת קשר ב-WhatsApp">💬</a></body></html>
+</script></body></html>
