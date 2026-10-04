@@ -272,8 +272,18 @@ document.addEventListener('change',function(e){if(e.target&&e.target.id==='dateF
 function toggleSiteMenu(btn){const menu=btn.closest('.site-menu');const open=menu.classList.toggle('open');btn.setAttribute('aria-expanded',open?'true':'false')}
 document.addEventListener('click',function(e){document.querySelectorAll('.site-menu.open').forEach(function(menu){if(!menu.contains(e.target)){menu.classList.remove('open');const b=menu.querySelector('.menu-toggle');if(b)b.setAttribute('aria-expanded','false')}})});
 
-const TOPICS=['הכל','דירה','טיול בארץ','טיול בחו״ל','ספורט','בילוי','לימודים','התנדבות','פרויקט','שחמט','מוזיקה','הליכות'];let activeTopic='הכל';
-const CREATE_TOPICS=['דירה','טיול בארץ','טיול בחו״ל','ספורט','בילוי','לימודים','התנדבות','פרויקט','שחמט','מוזיקה','הליכות'];
+const BASE_TOPICS=['דירה','טיול בארץ','טיול בחו״ל','ספורט','בילוי','לימודים','התנדבות','פרויקט','שחמט','מוזיקה','הליכות'];
+let TOPICS=['הכל',...BASE_TOPICS], CREATE_TOPICS=[...BASE_TOPICS], activeTopic='הכל';
+async function loadDynamicTopics(){
+ try{
+  const {data,error}=await sb.from('listings').select('topic').not('topic','is',null);
+  if(error)throw error;
+  const fromDb=(data||[]).map(x=>(x.topic||'').trim()).filter(t=>t&&t!=='אחר'&&t!=='הכל'&&t!=='טיול');
+  CREATE_TOPICS=[...new Set([...BASE_TOPICS,...fromDb])];
+  TOPICS=['הכל',...CREATE_TOPICS];
+  renderSearchTopicOptions();renderCreateTopicOptions();
+ }catch(err){console.warn('Could not load dynamic topics',err)}
+}
 function isTripTopic(t){return t==='טיול'||t==='טיול בארץ'||t==='טיול בחו״ל'}
 function legacyTopic(x){if(x.topic)return x.topic;if(x.listing_type==='travel_partner')return 'טיול';if(x.listing_type==='looking_together')return 'דירה';return 'אחר'}
 function renderSearchTopicOptions(){const box=document.getElementById('searchTopicOptions');if(!box)return;const q=(document.getElementById('searchTopicInput').value||'').trim();box.innerHTML='';TOPICS.filter(t=>!q||t.includes(q)).forEach(t=>{const b=document.createElement('button');b.type='button';b.className='topic-option'+(t===activeTopic?' selected':'');b.textContent=t;b.onclick=()=>selectSearchTopic(t);box.appendChild(b)})}
@@ -294,4 +304,5 @@ async function loadMyAds(){if(!currentUser)return go('auth');go('myAds');const b
 function editAd(x){editingAdId=x.id;currentListingType=x.listing_type||'partnership';go('publish');const form=document.querySelector('#publish form');const t=legacyTopic(x);if(CREATE_TOPICS.includes(t))selectCreateTopic(t);else{document.getElementById('createTopicSearch').value=t;document.getElementById('topicInput').value=t;renderCreateTopicOptions();syncTopicForm()}document.getElementById('publishTitle').textContent='עריכת שותפות';form.elements.name.value=x.name||'';form.elements.age.value=x.age||'';form.elements.city.value=x.city||'';form.elements.phone.value=x.phone||'';form.elements.description.value=x.description||'';form.elements.available_date.value=x.available_date||'';form.elements.date_flexibility.value=x.date_flexibility||'גמיש';if(t==='דירה'){form.elements.frombujet.value=x.frombujet??'';form.elements.tobujet.value=x.tobujet??'';form.elements.genere.value=x.genere||'';form.elements.generewanted.value=x.generewanted||'לא משנה'}syncDateField()}
 
 init();
+loadDynamicTopics();
 </script></body></html>
