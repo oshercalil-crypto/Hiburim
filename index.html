@@ -198,102 +198,81 @@ document.addEventListener('click',function(e){
 .topic-dropdown-list button:hover,.topic-dropdown-list button.selected{background:#f0f4ff}
 
 
-/* Visual refresh */
+/* Clean professional theme */
 :root{
- --brand:#2563eb;--brand2:#0ea5e9;--ink:#172033;--muted:#64748b;
- --surface:#ffffff;--line:#dbe4f0;--soft:#f3f7fc;
+  --brand:#1677c8;
+  --brand-dark:#0f5f9f;
+  --accent:#18a7a0;
+  --bg:#f6f9fc;
+  --surface:#ffffff;
+  --text:#1f2937;
+  --muted:#64748b;
+  --line:#dce5ee;
 }
-body{
- color:var(--ink);
- background:linear-gradient(180deg,#eef7ff 0,#f8fbff 34%,#f6f8fc 100%);
+html,body{background:var(--bg)!important;color:var(--text)!important}
+body{background:linear-gradient(180deg,#f2f8fc 0,#f8fafc 240px,#f6f9fc 100%)!important}
+h1,h2,h3{color:#173b5f}
+.card,.panel,.box,.listing,.listing-card{
+  background:var(--surface)!important;
+  border:1px solid var(--line)!important;
+  border-radius:16px!important;
+  box-shadow:0 5px 18px rgba(32,71,105,.07)!important;
 }
-.card,.panel,.screen>form{
- background:rgba(255,255,255,.96);
- border:1px solid var(--line);
- box-shadow:0 8px 24px rgba(30,64,175,.07);
-}
-button,.btn{
- transition:transform .12s ease,box-shadow .12s ease,filter .12s ease;
-}
-button:active,.btn:active{transform:scale(.985)}
+button,.btn{border-radius:12px!important}
 .primary,.btn-primary,button[type="submit"]{
- background:linear-gradient(135deg,var(--brand),var(--brand2));
- color:#fff;
- border:0;
- box-shadow:0 6px 16px rgba(37,99,235,.20);
+  background:linear-gradient(135deg,var(--brand),var(--accent))!important;
+  color:#fff!important;
+  border:0!important;
+  box-shadow:0 4px 12px rgba(22,119,200,.18)!important;
 }
 .topic-dropdown-btn{
- border:1px solid #bfd0e8;
- background:linear-gradient(180deg,#fff,#f5f9ff);
- box-shadow:0 3px 10px rgba(30,64,175,.06);
+  background:#fff!important;
+  color:#173b5f!important;
+  border:1.5px solid #b9ccdc!important;
+  font-weight:600!important;
+  box-shadow:none!important;
 }
-.topic-dropdown-panel{border-color:#cbd9eb}
-.topic-option{border:1px solid #e0e8f3!important;margin:4px 0}
-.topic-option.selected{background:#e8f2ff!important;border-color:#8ab7f4!important;color:#174ea6}
+.topic-dropdown-panel{
+  background:#fff!important;
+  border:1px solid var(--line)!important;
+  box-shadow:0 10px 26px rgba(32,71,105,.12)!important;
+}
+.topic-option{
+  background:#fff!important;
+  color:var(--text)!important;
+  border:0!important;
+}
+.topic-option:hover,.topic-option.selected{
+  background:#eaf5f6!important;
+  color:#0f6f75!important;
+}
 input,select,textarea{
- border:1px solid #cbd8e8!important;
- background:#fff;
+  background:#fff!important;
+  color:var(--text)!important;
+  border:1px solid #cbd8e4!important;
+  border-radius:11px!important;
 }
 input:focus,select:focus,textarea:focus{
- outline:2px solid rgba(37,99,235,.14);
- border-color:#6ea2e8!important;
+  outline:2px solid rgba(24,167,160,.12)!important;
+  border-color:var(--accent)!important;
 }
 #topicSpecificFilters{
- margin:12px 0;
- padding:12px;
- border-radius:14px;
- background:linear-gradient(135deg,#f0f7ff,#f8fbff);
- border:1px solid #d7e7fb;
+  margin-top:12px!important;
+  padding:12px!important;
+  background:#f0f8f8!important;
+  border:1px solid #d1e8e7!important;
+  border-radius:14px!important;
 }
-.popular-topic,.popular-chip,.topic-chip,[data-topic]{
- box-shadow:0 3px 10px rgba(30,64,175,.08);
+.popular-topic,.popular-chip,.topic-chip,.popular-topics button{
+  background:#fff!important;
+  color:#175b82!important;
+  border:1px solid #c8dce8!important;
+  box-shadow:none!important;
 }
-
-
-/* Strong visible color refresh */
-html,body{background:#eef5ff!important;color:#172033!important}
-body::before{
- content:"";position:fixed;z-index:-2;inset:0;
- background:
- radial-gradient(circle at 10% 5%,rgba(14,165,233,.18),transparent 30%),
- radial-gradient(circle at 90% 12%,rgba(99,102,241,.14),transparent 28%),
- linear-gradient(180deg,#eaf6ff 0%,#f7f9ff 48%,#eef3fb 100%)!important;
+.popular-topic:hover,.popular-chip:hover,.topic-chip:hover,.popular-topics button:hover{
+  background:#eaf5f6!important;
+  border-color:#8dc9c6!important;
 }
-header,.hero,.topbar,.main-header{
- background:linear-gradient(135deg,#1769e0,#18a6d9)!important;
- color:white!important;
- border-radius:0 0 24px 24px!important;
- box-shadow:0 8px 24px rgba(23,105,224,.22)!important;
-}
-h1{color:#1456b8}
-h2,h3{color:#1e4f91}
-.card,.panel,.box,.listing,.listing-card{
- background:#fff!important;
- border:1px solid #d6e3f5!important;
- border-radius:18px!important;
- box-shadow:0 8px 22px rgba(42,78,130,.10)!important;
-}
-.primary,.btn-primary,button[type="submit"]{
- background:linear-gradient(135deg,#1769e0,#0ea5e9)!important;
- color:#fff!important;border:none!important;
- box-shadow:0 6px 15px rgba(23,105,224,.25)!important;
-}
-.topic-dropdown-btn{
- background:#fff!important;border:2px solid #79a9e8!important;
- color:#174b8d!important;font-weight:700!important;
-}
-#topicSpecificFilters{
- background:linear-gradient(135deg,#dff1ff,#eef2ff)!important;
- border:1px solid #a9ccee!important;
- box-shadow:0 5px 14px rgba(30,100,180,.10)!important;
-}
-.popular-topics button:nth-child(6n+1),.popular-topic:nth-child(6n+1),.topic-chip:nth-child(6n+1){background:#e0f2fe!important;border-color:#7dd3fc!important;color:#075985!important}
-.popular-topics button:nth-child(6n+2),.popular-topic:nth-child(6n+2),.topic-chip:nth-child(6n+2){background:#dcfce7!important;border-color:#86efac!important;color:#166534!important}
-.popular-topics button:nth-child(6n+3),.popular-topic:nth-child(6n+3),.topic-chip:nth-child(6n+3){background:#f3e8ff!important;border-color:#d8b4fe!important;color:#6b21a8!important}
-.popular-topics button:nth-child(6n+4),.popular-topic:nth-child(6n+4),.topic-chip:nth-child(6n+4){background:#ffedd5!important;border-color:#fdba74!important;color:#9a3412!important}
-.popular-topics button:nth-child(6n+5),.popular-topic:nth-child(6n+5),.topic-chip:nth-child(6n+5){background:#fce7f3!important;border-color:#f9a8d4!important;color:#9d174d!important}
-.popular-topics button:nth-child(6n+6),.popular-topic:nth-child(6n+6),.topic-chip:nth-child(6n+6){background:#fef9c3!important;border-color:#fde047!important;color:#854d0e!important}
-input,select,textarea{background:#fff!important;border:1.5px solid #b9cce5!important}
 
 </style></head><body><div class="site-menu">
 <button class="menu-toggle" type="button" aria-label="פתיחת תפריט" aria-expanded="false" onclick="toggleSiteMenu(this)">☰</button>
@@ -303,7 +282,7 @@ input,select,textarea{background:#fff!important;border:1.5px solid #b9cce5!impor
 <a href="#" onclick="event.preventDefault();go('terms')">📄 תנאי שימוש</a>
 </div>
 </div><div class="wrap">
-<section id="home" class="screen active"><div class="hero"><h1>מה בא לך לעשות ביחד?</h1><p>מוצאים אנשים עם עניין משותף — מדירה וטיול ועד ספורט, בילוי, לימודים ועוד.</p></div><div class="home-actions"><button class="primary" onclick="openSmartSearch()">🔎 חיפוש שותפות</button></div><h2 class="topic-title">נושאים פופולריים</h2><div class="topic-grid"><button class="topic-chip" onclick="openTopic('דירה')"><span>🏠</span>🏠 דירה</button><button class="topic-chip" onclick="openTopic('טיול בארץ')"><span>🇮🇱</span>🇮🇱 טיול בארץ</button><button class="topic-chip" onclick="openTopic('טיול בחו״ל')"><span>✈️</span>✈️ טיול בחו״ל</button><button class="topic-chip" onclick="openTopic('ספורט')"><span>🏃</span>⚽ ספורט</button><button class="topic-chip" onclick="openTopic('בילוי')"><span>🎭</span>בילוי</button><button class="topic-chip" onclick="openTopic('לימודים')"><span>📚</span>📚 לימודים</button></div><div class="smart-note">בחר נושא והאתר יציג רק את הסינונים שמתאימים לו.</div><button class="linkbtn" onclick="openPersonal()">👤 אזור אישי</button><p id="personalHint" class="muted" style="text-align:center">כניסה, הרשמה וניהול המודעות.</p></section>
+<section id="home" class="screen active"><div class="hero"><h1>מה בא לך לעשות ביחד?</h1><p>מוצאים אנשים עם עניין משותף — מדירה וטיול ועד ספורט, בילוי, לימודים ועוד.</p></div><div class="home-actions"><button class="primary" onclick="openSmartSearch()">🔎 חיפוש שותפות</button></div><h2 class="topic-title">נושאים פופולריים</h2><div class="topic-grid"><button class="topic-chip" onclick="openTopic('דירה')"><span>🏠</span>דירה</button><button class="topic-chip" onclick="openTopic('טיול בארץ')"><span>🇮🇱</span>טיול בארץ</button><button class="topic-chip" onclick="openTopic('טיול בחו״ל')"><span>✈️</span>טיול בחו״ל</button><button class="topic-chip" onclick="openTopic('ספורט')"><span>🏃</span>ספורט</button><button class="topic-chip" onclick="openTopic('בילוי')"><span>🎭</span>בילוי</button><button class="topic-chip" onclick="openTopic('לימודים')"><span>📚</span>לימודים</button></div><div class="smart-note">בחר נושא והאתר יציג רק את הסינונים שמתאימים לו.</div><button class="linkbtn" onclick="openPersonal()">👤 אזור אישי</button><p id="personalHint" class="muted" style="text-align:center">כניסה, הרשמה וניהול המודעות.</p></section>
 <section id="auth" class="screen"><button class="back" onclick="go('home')">← חזרה</button><div class="card"><h2>כניסה לאזור האישי</h2><p class="muted">התחבר באמצעות אימייל וסיסמה.</p><form onsubmit="login(event)"><label>אימייל</label><input name="email" type="email" required autocomplete="email"><label>סיסמה</label><input name="password" type="password" required minlength="6" autocomplete="current-password"><button class="primary">כניסה</button></form><button class="secondary" onclick="go('signup')">אין לי חשבון — הרשמה</button><button class="linkbtn" onclick="go('forgot')">שכחתי סיסמה</button><div id="authStatus" class="status"></div></div></section>
 <section id="signup" class="screen"><button class="back" onclick="go('auth')">← חזרה</button><form class="card" onsubmit="signup(event)"><h2>יצירת חשבון</h2><label>שם לתצוגה</label><input name="displayName" required maxlength="80"><label>אימייל</label><input name="email" type="email" required autocomplete="email"><label>סיסמה</label><input name="password" type="password" required minlength="6" autocomplete="new-password"><button class="primary">יצירת חשבון</button><div id="signupStatus" class="status"></div></form></section>
 <section id="forgot" class="screen"><button class="back" onclick="go('auth')">← חזרה</button><form class="card" onsubmit="forgot(event)"><h2>שחזור סיסמה</h2><p class="muted">נשלח לאימייל קישור מאובטח לבחירת סיסמה חדשה.</p><label>אימייל</label><input name="email" type="email" required><button class="primary">שלח קישור</button><div id="forgotStatus" class="status"></div></form></section>
