@@ -3,7 +3,15 @@
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>חיבורים — חיפוש שותפים</title>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2">
+document.addEventListener('click',function(e){
+  const popular=e.target.closest('.popular-topic,.popular-chip,.topic-chip,[data-topic]');
+  if(popular && !popular.closest('#searchTopicDropdown')){
+    closeSearchTopicDropdown();
+  }
+});
+
+</script>
 <style>
 :root{--bg:#f5f7fb;--surface:#fff;--text:#172033;--muted:#687386;--primary:#635bff;--primary2:#4f46e5;--accent:#e9e7ff;--border:#e8eaf0;--ok:#137a4b;--err:#b42318;--shadow:0 18px 50px rgba(23,32,51,.09)}*{box-sizing:border-box}body{margin:0;font-family:Arial,"Noto Sans Hebrew",sans-serif;background:var(--bg);color:var(--text);min-height:100vh}.wrap{max-width:680px;margin:auto;padding:0 16px 48px}.screen{display:none}.screen.active{display:block}.hero{margin:0 -16px 24px;padding:42px 22px 36px;background:linear-gradient(145deg,#171b35,#302c6c 60%,#635bff);color:white;border-radius:0 0 34px 34px}.brand{display:inline-flex;padding:8px 12px;border-radius:999px;background:#ffffff1f;border:1px solid #ffffff2b;font-weight:700;font-size:13px;margin-bottom:22px}.hero h1{font-size:36px;line-height:1.08;margin:0 0 12px}.hero p{color:#e5e7ff;line-height:1.6}.choices{display:grid;gap:13px}.choice,.card,.listing{background:white;border:1px solid var(--border);border-radius:20px;box-shadow:0 8px 26px rgba(23,32,51,.05)}.choice{padding:20px;cursor:pointer}.choice.primaryChoice{background:linear-gradient(135deg,var(--primary),var(--primary2));color:#fff}.choice.primaryChoice p{color:#e8e7ff}.choice h2{font-size:19px;margin:0 0 6px}.choice p,.muted{color:var(--muted);line-height:1.5;margin:0}.card{padding:24px 20px;margin-top:8px;box-shadow:var(--shadow)}.card h2{font-size:25px;margin:0 0 8px}.back{background:transparent;border:0;color:#4b5565;padding:20px 2px 10px;font-weight:700;font-size:15px}button{font-family:inherit;border:0;border-radius:14px;padding:14px 17px;font-size:16px;font-weight:700;cursor:pointer;min-height:50px}.primary{width:100%;margin-top:20px;background:linear-gradient(135deg,var(--primary),var(--primary2));color:#fff}.secondary{width:100%;margin-top:10px;background:var(--accent);color:#4f46e5}.danger{width:100%;margin-top:12px;background:#fff1f2;color:#b42318;border:1px solid #fecdd3}.linkbtn{width:100%;background:transparent;color:var(--primary);padding:11px;margin-top:5px}label{display:block;font-weight:700;margin:18px 2px 7px;font-size:14px}input,textarea,select{width:100%;border:1px solid #dfe3eb;border-radius:14px;padding:14px 15px;font-size:16px;background:#fafbfc;outline:none}input:focus,textarea:focus,select:focus{background:white;border-color:#8d86ff;box-shadow:0 0 0 4px #635bff1a}textarea{min-height:125px;resize:vertical}.status{display:none;margin-top:14px;padding:13px 14px;border-radius:14px;line-height:1.45;font-size:14px}.status.ok{display:block;background:#ecfdf3;color:var(--ok)}.status.err{display:block;background:#fef3f2;color:var(--err)}.filters{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px}.results{display:grid;gap:14px;margin-top:18px}.listing{padding:19px}.listing h3{font-size:21px;margin:0 0 7px}.listing p{margin:7px 0;line-height:1.55}.listing-description{white-space:pre-wrap;overflow-wrap:anywhere}.empty{text-align:center;color:var(--muted);padding:30px}.userbox{background:#f7f6ff;border:1px solid #e1defe;border-radius:18px;padding:16px;margin:16px 0}.userbox strong{display:block;margin-bottom:5px}.nav{display:flex;gap:8px;flex-wrap:wrap;margin:15px 0}.nav button{flex:1;min-width:130px;background:linear-gradient(135deg,var(--primary),var(--primary2));color:#fff;border:0;border-radius:999px;font-size:14px}.whatsapp{display:block;width:max-content;max-width:100%;margin:16px 0 0 auto;padding:12px 18px;border-radius:999px;background:#25D366;color:#fff;text-decoration:none;font-weight:700;box-shadow:0 8px 22px rgba(37,211,102,.22)}.hint{font-size:13px;color:var(--muted);line-height:1.5;margin-top:8px}@media(min-width:760px){.wrap{max-width:1000px;padding:0 28px 60px}.hero{margin:0 -28px 30px;padding:55px 50px 45px;border-radius:0 0 42px 42px}.choices{grid-template-columns:repeat(3,1fr)}.card{max-width:680px;margin:18px auto}.results{grid-template-columns:repeat(2,1fr)}}
 
@@ -303,6 +311,11 @@ async function loadDynamicTopics(){
 }
 function isTripTopic(t){return t==='טיול'||t==='טיול בארץ'||t==='טיול בחו״ל'}
 function legacyTopic(x){if(x.topic)return x.topic;if(x.listing_type==='travel_partner')return 'טיול';if(x.listing_type==='looking_together')return 'דירה';return 'אחר'}
+
+function closeSearchTopicDropdown(){
+  const d=document.getElementById('searchTopicDropdown');
+  if(d)d.classList.remove('open');
+}
 function toggleTopicDropdown(id){
   const el=document.getElementById(id); if(!el)return;
   document.querySelectorAll('.topic-dropdown.open').forEach(x=>{if(x!==el)x.classList.remove('open')});
@@ -316,7 +329,7 @@ document.addEventListener('click',e=>{
   document.querySelectorAll('.topic-dropdown.open').forEach(x=>{if(!x.contains(e.target))x.classList.remove('open')});
 });
 function renderSearchTopicOptions(){const box=document.getElementById('searchTopicOptions');if(!box)return;const q=(document.getElementById('searchTopicInput').value||'').trim();box.innerHTML='';TOPICS.filter(t=>!q||t.includes(q)).forEach(t=>{const b=document.createElement('button');b.type='button';b.className='topic-option'+(t===activeTopic?' selected':'');b.textContent=t;b.onclick=()=>selectSearchTopic(t);box.appendChild(b)})}
-function selectSearchTopic(t){activeTopic=t;document.getElementById('searchTopicInput').value='';renderSearchTopicOptions();document.getElementById('smartHousingFilters').style.display=t==='דירה'?'block':'none';loadSmartResults();const b=document.getElementById('searchTopicBtn');if(b){const s=b.querySelector('span');if(s)s.textContent=t==='הכל'?'כל הנושאים':t;}closeTopicDropdown('searchTopicDropdown')}
+function selectSearchTopic(t){activeTopic=t;document.getElementById('searchTopicInput').value='';renderSearchTopicOptions();document.getElementById('smartHousingFilters').style.display=t==='דירה'?'block':'none';loadSmartResults();const b=document.getElementById('searchTopicBtn');if(b){const s=b.querySelector('span');if(s)s.textContent=t==='הכל'?'כל הנושאים':t;}closeTopicDropdown('searchTopicDropdown');closeSearchTopicDropdown()}
 function renderTopicButtons(){renderSearchTopicOptions()}
 function openSmartSearch(topic='הכל'){activeTopic=topic;go('smartSearch');const inp=document.getElementById('searchTopicInput');if(inp)inp.value='';renderSearchTopicOptions();document.getElementById('smartHousingFilters').style.display=topic==='דירה'?'block':'none';loadSmartResults()}
 function openTopic(topic){openSmartSearch(topic)}
