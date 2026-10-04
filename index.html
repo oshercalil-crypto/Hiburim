@@ -197,6 +197,58 @@ document.addEventListener('click',function(e){
 .topic-dropdown-list button{display:block;width:100%;text-align:right;border:0;background:#fff;padding:10px 12px;border-radius:9px;font:inherit;cursor:pointer}
 .topic-dropdown-list button:hover,.topic-dropdown-list button.selected{background:#f0f4ff}
 
+
+/* Visual refresh */
+:root{
+ --brand:#2563eb;--brand2:#0ea5e9;--ink:#172033;--muted:#64748b;
+ --surface:#ffffff;--line:#dbe4f0;--soft:#f3f7fc;
+}
+body{
+ color:var(--ink);
+ background:linear-gradient(180deg,#eef7ff 0,#f8fbff 34%,#f6f8fc 100%);
+}
+.card,.panel,.screen>form{
+ background:rgba(255,255,255,.96);
+ border:1px solid var(--line);
+ box-shadow:0 8px 24px rgba(30,64,175,.07);
+}
+button,.btn{
+ transition:transform .12s ease,box-shadow .12s ease,filter .12s ease;
+}
+button:active,.btn:active{transform:scale(.985)}
+.primary,.btn-primary,button[type="submit"]{
+ background:linear-gradient(135deg,var(--brand),var(--brand2));
+ color:#fff;
+ border:0;
+ box-shadow:0 6px 16px rgba(37,99,235,.20);
+}
+.topic-dropdown-btn{
+ border:1px solid #bfd0e8;
+ background:linear-gradient(180deg,#fff,#f5f9ff);
+ box-shadow:0 3px 10px rgba(30,64,175,.06);
+}
+.topic-dropdown-panel{border-color:#cbd9eb}
+.topic-option{border:1px solid #e0e8f3!important;margin:4px 0}
+.topic-option.selected{background:#e8f2ff!important;border-color:#8ab7f4!important;color:#174ea6}
+input,select,textarea{
+ border:1px solid #cbd8e8!important;
+ background:#fff;
+}
+input:focus,select:focus,textarea:focus{
+ outline:2px solid rgba(37,99,235,.14);
+ border-color:#6ea2e8!important;
+}
+#topicSpecificFilters{
+ margin:12px 0;
+ padding:12px;
+ border-radius:14px;
+ background:linear-gradient(135deg,#f0f7ff,#f8fbff);
+ border:1px solid #d7e7fb;
+}
+.popular-topic,.popular-chip,.topic-chip,[data-topic]{
+ box-shadow:0 3px 10px rgba(30,64,175,.08);
+}
+
 </style></head><body><div class="site-menu">
 <button class="menu-toggle" type="button" aria-label="פתיחת תפריט" aria-expanded="false" onclick="toggleSiteMenu(this)">☰</button>
 <div class="menu-dropdown">
@@ -205,7 +257,7 @@ document.addEventListener('click',function(e){
 <a href="#" onclick="event.preventDefault();go('terms')">📄 תנאי שימוש</a>
 </div>
 </div><div class="wrap">
-<section id="home" class="screen active"><div class="hero"><h1>מה בא לך לעשות ביחד?</h1><p>מוצאים אנשים עם עניין משותף — מדירה וטיול ועד ספורט, בילוי, לימודים ועוד.</p></div><div class="home-actions"><button class="primary" onclick="openSmartSearch()">🔎 חיפוש שותפות</button></div><h2 class="topic-title">נושאים פופולריים</h2><div class="topic-grid"><button class="topic-chip" onclick="openTopic('דירה')"><span>🏠</span>דירה</button><button class="topic-chip" onclick="openTopic('טיול בארץ')"><span>🇮🇱</span>טיול בארץ</button><button class="topic-chip" onclick="openTopic('טיול בחו״ל')"><span>✈️</span>טיול בחו״ל</button><button class="topic-chip" onclick="openTopic('ספורט')"><span>🏃</span>ספורט</button><button class="topic-chip" onclick="openTopic('בילוי')"><span>🎭</span>בילוי</button><button class="topic-chip" onclick="openTopic('לימודים')"><span>📚</span>לימודים</button></div><div class="smart-note">בחר נושא והאתר יציג רק את הסינונים שמתאימים לו.</div><button class="linkbtn" onclick="openPersonal()">👤 אזור אישי</button><p id="personalHint" class="muted" style="text-align:center">כניסה, הרשמה וניהול המודעות.</p></section>
+<section id="home" class="screen active"><div class="hero"><h1>מה בא לך לעשות ביחד?</h1><p>מוצאים אנשים עם עניין משותף — מדירה וטיול ועד ספורט, בילוי, לימודים ועוד.</p></div><div class="home-actions"><button class="primary" onclick="openSmartSearch()">🔎 חיפוש שותפות</button></div><h2 class="topic-title">נושאים פופולריים</h2><div class="topic-grid"><button class="topic-chip" onclick="openTopic('דירה')"><span>🏠</span>🏠 דירה</button><button class="topic-chip" onclick="openTopic('טיול בארץ')"><span>🇮🇱</span>🇮🇱 טיול בארץ</button><button class="topic-chip" onclick="openTopic('טיול בחו״ל')"><span>✈️</span>✈️ טיול בחו״ל</button><button class="topic-chip" onclick="openTopic('ספורט')"><span>🏃</span>⚽ ספורט</button><button class="topic-chip" onclick="openTopic('בילוי')"><span>🎭</span>בילוי</button><button class="topic-chip" onclick="openTopic('לימודים')"><span>📚</span>📚 לימודים</button></div><div class="smart-note">בחר נושא והאתר יציג רק את הסינונים שמתאימים לו.</div><button class="linkbtn" onclick="openPersonal()">👤 אזור אישי</button><p id="personalHint" class="muted" style="text-align:center">כניסה, הרשמה וניהול המודעות.</p></section>
 <section id="auth" class="screen"><button class="back" onclick="go('home')">← חזרה</button><div class="card"><h2>כניסה לאזור האישי</h2><p class="muted">התחבר באמצעות אימייל וסיסמה.</p><form onsubmit="login(event)"><label>אימייל</label><input name="email" type="email" required autocomplete="email"><label>סיסמה</label><input name="password" type="password" required minlength="6" autocomplete="current-password"><button class="primary">כניסה</button></form><button class="secondary" onclick="go('signup')">אין לי חשבון — הרשמה</button><button class="linkbtn" onclick="go('forgot')">שכחתי סיסמה</button><div id="authStatus" class="status"></div></div></section>
 <section id="signup" class="screen"><button class="back" onclick="go('auth')">← חזרה</button><form class="card" onsubmit="signup(event)"><h2>יצירת חשבון</h2><label>שם לתצוגה</label><input name="displayName" required maxlength="80"><label>אימייל</label><input name="email" type="email" required autocomplete="email"><label>סיסמה</label><input name="password" type="password" required minlength="6" autocomplete="new-password"><button class="primary">יצירת חשבון</button><div id="signupStatus" class="status"></div></form></section>
 <section id="forgot" class="screen"><button class="back" onclick="go('auth')">← חזרה</button><form class="card" onsubmit="forgot(event)"><h2>שחזור סיסמה</h2><p class="muted">נשלח לאימייל קישור מאובטח לבחירת סיסמה חדשה.</p><label>אימייל</label><input name="email" type="email" required><button class="primary">שלח קישור</button><div id="forgotStatus" class="status"></div></form></section>
