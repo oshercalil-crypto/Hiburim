@@ -274,6 +274,11 @@ input:focus,select:focus,textarea:focus{
   border-color:#8dc9c6!important;
 }
 
+
+/* Menu must be visible immediately on the initial home screen */
+#home.active ~ * .site-menu{display:block}
+body:has(#home.screen.active) .site-menu{display:block!important}
+
 </style></head><body><div class="site-menu">
 <button class="menu-toggle" type="button" aria-label="פתיחת תפריט" aria-expanded="false" onclick="toggleSiteMenu(this)">☰</button>
 <div class="menu-dropdown">
@@ -438,4 +443,11 @@ function editAd(x){editingAdId=x.id;currentListingType=x.listing_type||'partners
 
 init();
 loadDynamicTopics();
-</script></body></html>
+</script>
+<script>
+document.addEventListener('DOMContentLoaded',function(){
+  if(typeof updateSiteMenuVisibility==='function') updateSiteMenuVisibility('home');
+});
+</script>
+
+</body></html>
