@@ -249,6 +249,52 @@ input:focus,select:focus,textarea:focus{
  box-shadow:0 3px 10px rgba(30,64,175,.08);
 }
 
+
+/* Strong visible color refresh */
+html,body{background:#eef5ff!important;color:#172033!important}
+body::before{
+ content:"";position:fixed;z-index:-2;inset:0;
+ background:
+ radial-gradient(circle at 10% 5%,rgba(14,165,233,.18),transparent 30%),
+ radial-gradient(circle at 90% 12%,rgba(99,102,241,.14),transparent 28%),
+ linear-gradient(180deg,#eaf6ff 0%,#f7f9ff 48%,#eef3fb 100%)!important;
+}
+header,.hero,.topbar,.main-header{
+ background:linear-gradient(135deg,#1769e0,#18a6d9)!important;
+ color:white!important;
+ border-radius:0 0 24px 24px!important;
+ box-shadow:0 8px 24px rgba(23,105,224,.22)!important;
+}
+h1{color:#1456b8}
+h2,h3{color:#1e4f91}
+.card,.panel,.box,.listing,.listing-card{
+ background:#fff!important;
+ border:1px solid #d6e3f5!important;
+ border-radius:18px!important;
+ box-shadow:0 8px 22px rgba(42,78,130,.10)!important;
+}
+.primary,.btn-primary,button[type="submit"]{
+ background:linear-gradient(135deg,#1769e0,#0ea5e9)!important;
+ color:#fff!important;border:none!important;
+ box-shadow:0 6px 15px rgba(23,105,224,.25)!important;
+}
+.topic-dropdown-btn{
+ background:#fff!important;border:2px solid #79a9e8!important;
+ color:#174b8d!important;font-weight:700!important;
+}
+#topicSpecificFilters{
+ background:linear-gradient(135deg,#dff1ff,#eef2ff)!important;
+ border:1px solid #a9ccee!important;
+ box-shadow:0 5px 14px rgba(30,100,180,.10)!important;
+}
+.popular-topics button:nth-child(6n+1),.popular-topic:nth-child(6n+1),.topic-chip:nth-child(6n+1){background:#e0f2fe!important;border-color:#7dd3fc!important;color:#075985!important}
+.popular-topics button:nth-child(6n+2),.popular-topic:nth-child(6n+2),.topic-chip:nth-child(6n+2){background:#dcfce7!important;border-color:#86efac!important;color:#166534!important}
+.popular-topics button:nth-child(6n+3),.popular-topic:nth-child(6n+3),.topic-chip:nth-child(6n+3){background:#f3e8ff!important;border-color:#d8b4fe!important;color:#6b21a8!important}
+.popular-topics button:nth-child(6n+4),.popular-topic:nth-child(6n+4),.topic-chip:nth-child(6n+4){background:#ffedd5!important;border-color:#fdba74!important;color:#9a3412!important}
+.popular-topics button:nth-child(6n+5),.popular-topic:nth-child(6n+5),.topic-chip:nth-child(6n+5){background:#fce7f3!important;border-color:#f9a8d4!important;color:#9d174d!important}
+.popular-topics button:nth-child(6n+6),.popular-topic:nth-child(6n+6),.topic-chip:nth-child(6n+6){background:#fef9c3!important;border-color:#fde047!important;color:#854d0e!important}
+input,select,textarea{background:#fff!important;border:1.5px solid #b9cce5!important}
+
 </style></head><body><div class="site-menu">
 <button class="menu-toggle" type="button" aria-label="פתיחת תפריט" aria-expanded="false" onclick="toggleSiteMenu(this)">☰</button>
 <div class="menu-dropdown">
